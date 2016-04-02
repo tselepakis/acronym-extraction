@@ -1,4 +1,9 @@
-
+/**
+ * This Test class demonstrates the project.
+ * 
+ * @author Tselepakis Konstantinos <ktselepakis@gmail.com>
+ *
+ */
 
 public class Test {
 

@@ -1,7 +1,12 @@
 import java.util.ArrayList;
 import java.util.List;
 
-/*Definition of an Acronym object*/
+/**
+ * Definition of an Acronym object
+ * 
+ * @author Tselepakis Konstantinos <ktselepakis@gmail.com>
+ *
+ */
 
 public class Acronym {
 	int occurrences = 0;

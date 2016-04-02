@@ -9,22 +9,29 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-
+/**
+ * AcronymExtraction class is the implementation of the algorithm
+ * proposed in READme.md.
+ * 
+ * @author Tselepakis Konstantinos <ktselepakis@gmail.com>
+ *
+ */
 public class AcronymExtraction 
 {
-
 	
 	ProcessFile myProc = new ProcessFile();
 	public List<String> records = myProc.firstList();
 	
-	public int window = 3;
-	public String path = "StopWordsList.txt";
+	public int window;
+	public String path;
 	public Map<String, Acronym> acronyms = new HashMap<>();
 	public Set<String> stopWordsList = new HashSet<>();
 	private BufferedReader br;
 	
 	int totalTokens = 0;
-
+	
+	/*Different patterns that could be used*/
+	
 	//Pattern pattern = Pattern.compile("\\w*-?[A-Z]-?\\w*-?[A-Z]-?\\w*|\\w+-?[A-Z]+-?\\w*-?|\\(\\w*-?\\w*\\)");
 	//Pattern pattern = Pattern.compile("\\w*[A-Z]\\w*[A-Z]\\w*|\\w+[A-Z]+\\w*");
 	Pattern pattern = Pattern.compile("^[A-Z][a-z]?-?[A-Z]|^[a-z]+-?[A-Z]-?[A-Z]");
@@ -36,9 +43,9 @@ public class AcronymExtraction
 	}
 
 	public void initializeStructure()
-	{
-		
-		try {
+	{		
+		try
+		{
 			br = new BufferedReader(new FileReader( path ));
 			String line;
 			while ((line = br.readLine())!=null)
@@ -46,12 +53,11 @@ public class AcronymExtraction
 				line = line.replaceAll("[^A-Za-z0-9-/ ]", "");
 				stopWordsList.add(line.trim());
 			}
-
-		} catch ( IOException e )
+		}
+		catch ( IOException e )
 		{
 			e.printStackTrace();
 		}
-	
 		
 		for (int i = 0; i < records.size(); i++)
 		{
@@ -179,13 +185,13 @@ public class AcronymExtraction
 		}
 	}
 
-	public void print() {
-		//System.out.println(totalTokens);
+	public void print()
+	{
 		for (Map.Entry<String, Acronym> entry : acronyms.entrySet())
 		{
 			String acronym = entry.getValue().acronym;
 			String acronymExpantion = entry.getValue().acronymExpantion;
-			int acronymCount = entry.getValue().occurrences;
+			//int acronymCount = entry.getValue().occurrences;
 			double score = entry.getValue().acronymScore;
 			//System.out.println(acronym+":	"+acronymExpantion+"	"+score);
 			//we can print only expansions that we are more confident they are correct
@@ -193,7 +199,6 @@ public class AcronymExtraction
 			{
 				//System.out.format("%60s%10s%16f\n", acronymExpantion, acronym, score);
 				System.out.println(acronym+":	"+acronymExpantion+"	"+Math.round(score));
-				//System.out.println(Math.round(score));
 			}
 			if(entry.getKey().equals(""))
 			{
@@ -204,5 +209,4 @@ public class AcronymExtraction
 			}
 		}
 	}
-
 }
