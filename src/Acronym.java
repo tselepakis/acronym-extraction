@@ -1,10 +1,10 @@
 import java.util.ArrayList;
 import java.util.List;
 
+/*Definition of an Acronym object*/
 
 public class Acronym {
 	int occurrences = 0;
-	//List<Expantion> possibleExpantions;
 	List<Expansion> possibleExpansions = new ArrayList<>();
 	String acronym;
 	String acronymExpantion = "";
